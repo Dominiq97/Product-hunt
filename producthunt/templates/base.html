@@ -64,6 +64,10 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
+            <form id class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
             <a class="nav-item nav-link" href="{% url 'create' %}"><span class="oi oi-plus"></span></a>
             <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}"><b>Logout</b></a>  
             <form id="logout" method="POST" action="{% url 'logout' %}">
@@ -71,6 +75,10 @@
                 <input type="hidden" />
             </form>
         {% else %}
+            <form id class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
             <a class="nav-item nav-link" href="{% url 'login' %}"><b>Login</a>
             <a class="nav-item nav-link" href="{% url 'signup' %}"> Signup</b></a> 
         {% endif %}

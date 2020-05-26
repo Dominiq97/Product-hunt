@@ -19,7 +19,7 @@ class ListProductsByTag(TemplateView):
 		tag_url = kwargs['tag']
 		print(tag_url)
 		context = {}
-		context['products'] = Product.objects.filter(tag__name=tag_url)
+		context['products'] = Product.objects.filter(tag__syntax=tag_url)
 
 
 		# term = kwargs['term']
