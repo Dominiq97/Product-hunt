@@ -2,11 +2,40 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Product
 from django.utils import timezone
+from django.views.generic import TemplateView
+from django.db.models import Q
 
 # Create your views here.
 def home(request):
     products = Product.objects
     return render(request,'products/home.html',{'products':products})
+
+class ListProductsByTag(TemplateView):
+
+	template_name = 'products/search.html'
+
+	def get(self, request, *args, **kwargs):
+
+		tag_url = kwargs['tag']
+		print(tag_url)
+		context = {}
+		context['products'] = Product.objects.filter(tag__name=tag_url)
+
+
+		# term = kwargs['term']
+		# Qd = Q()
+		# Qd |= Q(name__icontains=term)
+		# Qd |= Q(author__icontains=term)
+
+		# context['products'] = Product.objects.filter(Qd)
+
+
+		return render(request, self.template_name, context)
+
+def search(request):
+    products = Product.objects
+    return render(request, 'products/search.html',{'products':products})
+
 
 @login_required(login_url="/accounts/signup")
 def create(request):
