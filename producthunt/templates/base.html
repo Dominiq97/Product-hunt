@@ -75,8 +75,9 @@
           <a class="dropdown-item" href="{% url 'category' %}">Surse moka</a>
         </div>
         </li>
-            <form id="search" method="POST" action="{% url 'create' %}" class="form-inline">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form id="search" method="GET" action="{% url 'search' %}" class="form-inline">
+              {% csrf_token %}
+              <input class="form-control mr-sm-2" name="q" value="{{request.GET.q}}" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
             <a class="nav-item nav-link" href="{% url 'create' %}"><span class="oi oi-plus"></span></a>

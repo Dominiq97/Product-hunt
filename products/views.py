@@ -32,9 +32,18 @@ class ListProductsByTag(TemplateView):
 
 		return render(request, self.template_name, context)
 
+ #   def post(self, request, *args, **kwargs):
+ #       term = kwargs['term']
+ #       Qd |= Q(syntax__icontains=term)
+ #       context['products'] = Product.objects.filter(Qd)
+    
+    
 def search(request):
-    products = Product.objects
-    return render(request, 'products/search.html',{'products':products})
+
+    template = 'products/search.html'
+    query = request.GET.get('q')
+    results = Product.objects.filter(Q(title__icontains=query) | Q(body__icontains=query))    
+    return render(request,template,{'products':results})
 
 
 @login_required(login_url="/accounts/login")
@@ -67,6 +76,7 @@ def detail(request, product_id):
 def category(request):
     products = Product.objects.filter(Q(category="1"))
     return render(request,'products/categories.html',{'products':products})
+
 
 @login_required(login_url="/accounts/login")
 def upvote(request, product_id):
