@@ -10,7 +10,8 @@ urlpatterns = [
     path('',views.home, name='home'),
     path('accounts/',include('accounts.urls')),
     path('products/',include('products.urls')),
-    path('products_by/<str:tag>', views.ListProductsByTag.as_view(),name='list_by_tag')
+    path('products_by/<str:tag>', views.ListProductsByTag.as_view(),name='list_by_tag'),
+    path('products/category.html',views.category,name='category')
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

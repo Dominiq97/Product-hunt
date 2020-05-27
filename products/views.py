@@ -63,6 +63,11 @@ def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     return render(request,'products/detail.html',{'product':product})
 
+
+def category(request):
+    products = Product.objects.filter(Q(category="1"))
+    return render(request,'products/categories.html',{'products':products})
+
 @login_required(login_url="/accounts/login")
 def upvote(request, product_id):
     if request.method == "POST":

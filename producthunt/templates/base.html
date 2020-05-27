@@ -70,12 +70,12 @@
           Categories
         </a>
         <div class="dropdown-menu form-inline" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Learn</a>
-          <a class="dropdown-item" href="#">Documentation searching</a>
-          <a class="dropdown-item" href="#">Surse moka</a>
+          <a class="dropdown-item" href="{% url 'category' %}">Learn</a>
+          <a class="dropdown-item" href="{% url 'category' %}">Documentation searching</a>
+          <a class="dropdown-item" href="{% url 'category' %}">Surse moka</a>
         </div>
         </li>
-            <form id class="form-inline">
+            <form id="search" method="POST" action="{% url 'create' %}" class="form-inline">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
@@ -91,12 +91,12 @@
           Categories
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Learn</a>
-          <a class="dropdown-item" href="#">Documentation searching</a>
-          <a class="dropdown-item" href="#">Surse moka</a>
+          <a class="dropdown-item" href="{% url 'category' %}">Learn</a>
+          <a class="dropdown-item" href="{% url 'category' %}">Documentation searching</a>
+          <a class="dropdown-item" href="{% url 'category' %}">Surse moka</a>
         </div>
       </li>
-            <form id class="form-inline">
+            <form id="search" class="form-inline">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>

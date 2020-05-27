@@ -6,4 +6,6 @@ urlpatterns = [
     path('<int:product_id>', views.detail, name='detail'),
     path('<int:product_id>/upvote', views.upvote, name='upvote'),
 	path('search', views.search, name='search'),
+    path('products_by/<str:tag>', views.ListProductsByTag.as_view(),name='list_by_tag'),
+    path('products/<int:category_id>',views.category, name='category')
 ]
