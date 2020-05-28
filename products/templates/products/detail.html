@@ -20,11 +20,17 @@
     </div>
 </div>
 <div class="row pt-3">
-    <div class="col-4">
+    <div class="col-2">
        <h4><span class="oi oi-magnifying-glass">  </span>  Hunted by {{product.hunter.username}}</h4>
     </div>
-    <div class="col-4 text-right">
+    <div class="col-2 text-right">
         <h4><span class="oi oi-clock"></span>{{product.pub_date_pretty}}</h4>
+    </div>
+    <div class="col-4 text-right">
+        <h4>Tags:</h4>
+        {% for tag in tags.all %} 
+        <a href="{% url 'list_by_tag' tag %}"><h4>{{tag.syntax}} </h4></a>
+        {% endfor %}
     </div>
 </div>
 <div class="row">

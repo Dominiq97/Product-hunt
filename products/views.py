@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Product
+from .models import Product, Tag, Category
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.db.models import Q
@@ -42,8 +42,10 @@ def search(request):
 
     template = 'products/search.html'
     query = request.GET.get('q')
-    results = Product.objects.filter(Q(title__icontains=query) | Q(body__icontains=query))    
+    results = Product.objects.filter(Q(title__icontains=query) | Q(body__icontains=query) | Q(tag__syntax=query) | Q(category__name=query))    
     return render(request,template,{'products':results})
+
+
 
 
 @login_required(login_url="/accounts/login")
@@ -70,7 +72,9 @@ def create(request):
 
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    return render(request,'products/detail.html',{'product':product})
+#    tags = Product.objects.filter(Q(tag__syntax='legal'))
+    tags = Tag.objects.filter(Q(products=product))
+    return render(request,'products/detail.html',{'product':product,'tags':tags})
 
 
 def category(request):
