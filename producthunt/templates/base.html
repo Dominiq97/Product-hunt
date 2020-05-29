@@ -48,6 +48,45 @@
           font-size: 3.5rem;
         }
       }
+
+      .showtime {
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  text-decoration: none;
+  padding: 6px 12px;
+  background: #ff6600;
+  color: #fff;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  margin: 10px 10px 10px 0;
+}
+.showtime:hover {
+  background: #ff8822;
+  color: #fff;
+}
+/* fake the cut out with a masked circle*/
+.showtime:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute !important;
+  z-index: 100;
+  top: 8px;
+  left: -10px;
+  border: 7px solid #fff;
+  border-radius: 8px;
+}
+.showtime:after {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute !important;
+  z-index: 100;
+  top: 8px;
+  right: -10px;
+  border: 7px solid #fff;
+  border-radius: 8px;
+}
     </style>
   </head>
   <body>
@@ -70,9 +109,9 @@
           Categories
         </a>
         <div class="dropdown-menu form-inline" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'category' %}">Learn</a>
-          <a class="dropdown-item" href="{% url 'category' %}">Documentation searching</a>
-          <a class="dropdown-item" href="{% url 'category' %}">Surse moka</a>
+          {% for cat in categories %}
+          <h4><a class="dropdown-item" href="{% url 'category' %}">{{cat.name}}</a></h4>
+          {% endfor %}
         </div>
         </li>
             <form id="search" method="GET" action="{% url 'search' %}" class="form-inline">

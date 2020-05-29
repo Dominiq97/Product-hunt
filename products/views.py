@@ -45,6 +45,10 @@ def search(request):
     results = Product.objects.filter(Q(title__icontains=query) | Q(body__icontains=query) | Q(tag__syntax=query) | Q(category__name=query))    
     return render(request,template,{'products':results})
 
+def category(request):
+    categories = Category.objects.all() # this will get all categories, you can do some filtering if you need (e.g. excluding categories without posts in it)
+    return render (request, 'products/categories.html', {'categories': categories}) # blog/category_list.html should be the template that categories are listed.
+    
 
 
 
@@ -77,9 +81,15 @@ def detail(request, product_id):
     return render(request,'products/detail.html',{'product':product,'tags':tags})
 
 
-def category(request):
-    products = Product.objects.filter(Q(category="1"))
-    return render(request,'products/categories.html',{'products':products})
+#def category(request):
+#    products = Product.objects.filter(Q(category=1))
+#    return render(request,'products/categories.html',{'products':products})
+
+#def category(request):
+#    template = 'products/categories.html'
+#    query = request.GET.get('cat')
+#    results = Product.objects.filter(Q(category__name=query))    
+#    return render(request,template,{'products':results})
 
 
 @login_required(login_url="/accounts/login")
@@ -89,3 +99,6 @@ def upvote(request, product_id):
         product.votes_total += 1
         product.save()
         return redirect('/products/'+str(product.id))
+
+    class Meta:
+        unique_together = (('user','suggestedName'),)
