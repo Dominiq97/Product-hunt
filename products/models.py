@@ -39,6 +39,12 @@ class Product(models.Model):
 class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+class Comment(models.Model):
+    message = models.TextField('Message')
+    date_comment = models.DateField(auto_now_add=True, blank=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
     
 
 

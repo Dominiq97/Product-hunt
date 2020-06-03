@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Product, Tag, Category
+from .models import Product, Tag, Category,Comment
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.db.models import Q
@@ -42,15 +42,14 @@ def search(request):
 
     template = 'products/search.html'
     query = request.GET.get('q')
-    results = Product.objects.filter(Q(title__icontains=query) | Q(body__icontains=query) | Q(tag__syntax=query) | Q(category__name=query))    
+    results = Product.objects.filter(Q(tag__syntax=query))    
     return render(request,template,{'products':results})
+
 
 def category(request):
     categories = Category.objects.all() # this will get all categories, you can do some filtering if you need (e.g. excluding categories without posts in it)
     return render (request, 'products/categories.html', {'categories': categories}) # blog/category_list.html should be the template that categories are listed.
     
-
-
 
 @login_required(login_url="/accounts/login")
 def create(request):
@@ -74,11 +73,24 @@ def create(request):
     else:
         return render(request,'products/create.html')
 
+@login_required(login_url="/accounts/login")
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-#    tags = Product.objects.filter(Q(tag__syntax='legal'))
+    comment = Comment.objects.filter(product_id=product_id)
     tags = Tag.objects.filter(Q(products=product))
-    return render(request,'products/detail.html',{'product':product,'tags':tags})
+    if request.method == 'POST':
+        if request.POST['comment']:
+            comment = Comment()
+            comment.product_id=product
+            comment.user_id=request.user
+            comment.message=request.POST['comment']
+            comment.save()
+            return redirect('products/detail.html')
+        else:
+            return render(request,'products/detail.html',{'error':'No comment written'})
+    else:
+        return render(request,'products/detail.html',{'product':product,'tags':tags,'comments':comment})
+    
 
 
 #def category(request):

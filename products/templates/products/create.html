@@ -9,7 +9,7 @@
     <br><br>
 {% endif%}
 
-<form method="POST" action="{% url 'create' %}"" enctype="multipart/form-data">
+<form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
     {% csrf_token %}
 <br>
     Title:<br />

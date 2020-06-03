@@ -104,16 +104,6 @@
         <div class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
         <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Categories
-        </a>
-        <div class="dropdown-menu form-inline" aria-labelledby="navbarDropdownMenuLink">
-          {% for cat in categories %}
-          <h4><a class="dropdown-item" href="{% url 'category' %}">{{cat.name}}</a></h4>
-          {% endfor %}
-        </div>
-        </li>
             <form id="search" method="GET" action="{% url 'search' %}" class="form-inline">
               {% csrf_token %}
               <input class="form-control mr-sm-2" name="q" value="{{request.GET.q}}" type="search" placeholder="Search" aria-label="Search">
@@ -126,16 +116,7 @@
                 <input type="hidden" />
             </form>
         {% else %}
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Categories
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'category' %}">Learn</a>
-          <a class="dropdown-item" href="{% url 'category' %}">Documentation searching</a>
-          <a class="dropdown-item" href="{% url 'category' %}">Surse moka</a>
-        </div>
-      </li>
+        
             <form id="search" class="form-inline">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

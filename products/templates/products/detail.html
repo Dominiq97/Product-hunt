@@ -43,6 +43,34 @@
     {% csrf_token %}
     <input type="hidden">
 </form>
+<br><br>
+
+<div class="card my-4">
+    <h5 class="card-header">Leave a comment:</h5>
+    <div clas="card-body">
+        <form method="POST" action="{% url 'detail' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea class="form-control" rows="3" name="comment"></textarea>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Comment!" />
+        </form>
+    </div>
+</div>
+
+
+{% for comm in comments %}
+<div class="row">
+    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+    <div class="media-body">
+        <h5 class=mt-0> {{comm.user_id}}</h5>
+        <div class="col-8">
+            {{comm.message}}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
 
 
 {% endblock %}
