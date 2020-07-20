@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'filer',
+    'easy_thumbnails',
+    'mptt',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +71,8 @@ TEMPLATES = [
         },
     },
 ]
+
+THUMBNAIL_HIGH_RESOLUTION = True
 
 WSGI_APPLICATION = 'producthunt.wsgi.application'
 

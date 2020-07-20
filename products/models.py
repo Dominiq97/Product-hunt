@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from filer.fields.image import FilerImageField
+from filer.fields.file import FilerFileField
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -17,8 +19,8 @@ class Product(models.Model):
     pub_date = models.DateTimeField()
     body = models.TextField(max_length=1000)
     url = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='images/')
-    icon = models.ImageField(upload_to='images/')
+    image = FilerFileField(null=True, blank=True, related_name="file+", on_delete=models.CASCADE)
+    icon = FilerImageField(null=True, blank=True, related_name="image+", on_delete=models.CASCADE)
     votes_total = models.IntegerField(default=1)
     hunter = models.ForeignKey(User, on_delete=models.CASCADE)
 
