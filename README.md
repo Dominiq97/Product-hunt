@@ -9,10 +9,10 @@ Create your own virtual environment : <br>
 Then install the requirements : <br>
 `pip install -r requirements.txt`
 
-And migrate the changes: 
+And migrate the changes: <br>
 `python manage.py migrate`
 
-You're ready to go!!
+You're ready to go!! <br>
 `python manage.py runserver`
 
 
