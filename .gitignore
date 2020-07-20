@@ -1,3 +1,7 @@
+### Virtualenv
+bin
+
+
 ### Django ###
 *.log
 *.pot
